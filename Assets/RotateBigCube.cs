@@ -27,7 +27,6 @@ public class RotateBigCube : MonoBehaviour
         {
             // get the 2D position of the first mouse click 
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            print(firstPressPos);
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -39,6 +38,12 @@ public class RotateBigCube : MonoBehaviour
 
             currentSwipe.Normalize();
 
+            if (IsLeftSwipe())
+            {
+                target.transform.Rotate(0,90,0,Space.World);
+            } else if (IsRightSwipe()){
+                target.transform.Rotate(0,-90,0,Space.World);
+            }
 
         }
     }
@@ -48,13 +53,13 @@ public class RotateBigCube : MonoBehaviour
             return currentSwipe.y > -0.5f && currentSwipe.y < 0.5f;
         }
 
-        bool LeftSwipe()
+        bool IsLeftSwipe()
         {
             return currentSwipe.x < 0 && IsSmallYMovement(); 
         }
 
 
-        bool RightSwipe()
+        bool IsRightSwipe()
         {
             return currentSwipe.x > 0 && IsSmallYMovement(); 
         }
