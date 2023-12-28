@@ -9,6 +9,8 @@ public class RotateBigCube : MonoBehaviour
     Vector2 currentSwipe;
     
     public GameObject target; 
+
+    float speed = 200f;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,13 @@ public class RotateBigCube : MonoBehaviour
     void Update()
     {
         Swipe();
+
+        // automatically move to the target position 
+        if (transform.rotation != target.transform.rotation)
+        {
+            var step = speed * Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, step);
+        }
     }
 
     void Swipe(){
@@ -63,6 +72,19 @@ public class RotateBigCube : MonoBehaviour
         {
             return currentSwipe.x > 0 && IsSmallYMovement(); 
         }
+
+        bool IsUpLeftSwipe()
+        {
+            // seems to overlap with isleftswipe
+            // and why do we sometimes compare with 0 and sometimes with 0f
+            return currentSwipe.y > 0 && currentSwipe.x < 0f;
+        }
+
+        bool IsUpRightSwipe()
+        {
+            return currentSwipe.y > 0 && currentSwipe.x > 0f;
+        }
+
 
 
 }
