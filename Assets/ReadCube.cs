@@ -11,6 +11,9 @@ public class ReadCube : MonoBehaviour
     public Transform tBack;
     public Transform tLeft;
     public Transform tRight;
+
+    // mysterious thing to go with putting prefab cube faces on a layer
+    private int layerMask = 1 << 8; 
     
     // Start is called before the first frame update
     void Start()
