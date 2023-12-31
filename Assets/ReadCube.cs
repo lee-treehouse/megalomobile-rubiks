@@ -17,17 +17,18 @@ public class ReadCube : MonoBehaviour
     private int layerMask = 1 << 8; 
 
     CubeState cubeState;
+    CubeMappy cubeMap;
 
     // Start is called before the first frame update
     void Start()
     {
         cubeState = FindObjectOfType<CubeState>();
-    }
+        cubeMap = FindObjectOfType<CubeMappy>();
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (!cubeMap)
+        {
+            print("can't find cubemap");
+        }
 
         List<GameObject> facesHit = new List<GameObject>();
         Vector3 ray = tFront.transform.position;
@@ -41,6 +42,21 @@ public class ReadCube : MonoBehaviour
         } else {
             Debug.DrawRay(ray, tFront.right * 1000, Color.green);
         }
+
+
+    print("faces hit");
+    print (facesHit);
+
+        cubeState.front = facesHit;
+        cubeMap.Set();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
+
 
     }
 }
